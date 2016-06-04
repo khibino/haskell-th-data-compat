@@ -12,11 +12,11 @@
 -- This module provides compatibility definitions of
 -- data-type declaration templates for before temaplate-haskell-2.11
 module Language.Haskell.TH.Compat.Data (
-#if MIN_VERSION_template_haskell(2,11,0)
-  module Language.Haskell.TH.Compat.Data.Current
-#else
-  module Language.Haskell.TH.Compat.Data.V210
-#endif
+  -- * Interfaces to construct data declarations
+  dataD', newtypeD', dataInstD', newtypeInstD',
+
+  -- * Interfaces to destruct data declarations
+  unDataD, unNewtypeD, unDataInstD, unNewtypeInstD,
   ) where
 
 #if MIN_VERSION_template_haskell(2,11,0)
