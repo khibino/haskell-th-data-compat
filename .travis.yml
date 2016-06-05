@@ -1,0 +1,17 @@
+sudo: false
+language: haskell
+ghc:
+  - 7.8
+  - 7.6
+  - 7.4
+env:
+  - PKG_DIR=.
+before_install:
+  - date
+  - echo $PATH
+  - which cabal ; cabal --version ; dpkg -l cabal-install
+  - find /usr/local/ghc/*/bin -type f -ls
+  - which ghc   ; ghc --version   ; dpkg -l ghc ;
+  - cd $PKG_DIR
+after_script:
+  - date
