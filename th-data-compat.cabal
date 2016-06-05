@@ -36,3 +36,11 @@ library
   hs-source-dirs:      src
   default-language:    Haskell2010
   ghc-options:         -Wall
+
+source-repository head
+  type:       git
+  location:   https://github.com/khibino/haskell-th-data-compat
+
+source-repository head
+  type:       mercurial
+  location:   https://bitbucket.org/khibino/haskell-th-data-compat
