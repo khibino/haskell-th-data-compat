@@ -18,7 +18,7 @@ dataD' :: CxtQ -> Name -> [TyVarBndr] -> [ConQ] -> [Name]
        -> DecQ
 dataD' = dataD
 
--- | Compatible interface to destruct DataD
+-- | Compatible interface to destruct 'DataD'
 unDataD :: Dec -> Maybe (Cxt, Name, [TyVarBndr], Maybe Kind, [Con], [Type])
 unDataD (DataD cxt n bs cs ds) = Just (cxt, n, bs, Nothing, cs, map ConT ds)
 unDataD  _                     = Nothing
@@ -29,7 +29,7 @@ newtypeD' :: CxtQ -> Name -> [TyVarBndr] -> ConQ -> [Name]
           -> DecQ
 newtypeD' = newtypeD
 
--- | Compatible interface to destruct NewtypeD
+-- | Compatible interface to destruct 'NewtypeD'
 unNewtypeD :: Dec -> Maybe (Cxt, Name, [TyVarBndr], Maybe Kind, Con, [Type])
 unNewtypeD (NewtypeD cxt n bs c ds) = Just (cxt, n, bs, Nothing, c, map ConT ds)
 unNewtypeD  _                       = Nothing
@@ -40,7 +40,7 @@ dataInstD' :: CxtQ -> Name -> [TypeQ] -> [ConQ] -> [Name]
            -> DecQ
 dataInstD' = dataInstD
 
--- | Compatible interface to destruct DataInstD
+-- | Compatible interface to destruct 'DataInstD'
 unDataInstD :: Dec -> Maybe (Cxt, Name, [Type], Maybe Kind, [Con], [Type])
 unDataInstD (DataInstD cxt n as cs ds) = Just (cxt, n, as, Nothing, cs, map ConT ds)
 unDataInstD  _                         = Nothing
@@ -51,7 +51,7 @@ newtypeInstD' :: CxtQ -> Name -> [TypeQ] -> ConQ -> [Name]
               -> DecQ
 newtypeInstD' = newtypeInstD
 
--- | Compatible interface to destruct NewtypeInstD
+-- | Compatible interface to destruct 'NewtypeInstD'
 unNewtypeInstD :: Dec -> Maybe (Cxt, Name, [Type], Maybe Kind, Con, [Type])
 unNewtypeInstD (NewtypeInstD cxt n as c ds) = Just (cxt, n, as, Nothing, c, map ConT ds)
 unNewtypeInstD  _                           = Nothing
