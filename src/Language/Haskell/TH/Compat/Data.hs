@@ -16,7 +16,7 @@ module Language.Haskell.TH.Compat.Data (
   dataD', newtypeD', dataInstD', newtypeInstD',
 
   -- * Interfaces to destruct data declarations
-  unDataD, unNewtypeD, unDataInstD, unNewtypeInstD,
+  unDataD, unNewtypeD, unDataInstD, unNewtypeInstD, unInstanceD,
   ) where
 
 #if MIN_VERSION_template_haskell(2,11,0)

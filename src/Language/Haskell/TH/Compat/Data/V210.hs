@@ -3,12 +3,13 @@ module Language.Haskell.TH.Compat.Data.V210 (
   newtypeD', unNewtypeD,
   dataInstD', unDataInstD,
   newtypeInstD', unNewtypeInstD,
+  unInstanceD,
   ) where
 
 import Language.Haskell.TH
   (CxtQ, ConQ, TypeQ, DecQ,
    Cxt, Con, Type (ConT), Name, TyVarBndr, Kind,
-   Dec (DataD, NewtypeD, DataInstD, NewtypeInstD),
+   Dec (DataD, NewtypeD, DataInstD, NewtypeInstD, InstanceD),
    dataD, newtypeD, dataInstD, newtypeInstD)
 
 
@@ -55,3 +56,9 @@ newtypeInstD' = newtypeInstD
 unNewtypeInstD :: Dec -> Maybe (Cxt, Name, [Type], Maybe Kind, Con, [Type])
 unNewtypeInstD (NewtypeInstD cxt n as c ds) = Just (cxt, n, as, Nothing, c, map ConT ds)
 unNewtypeInstD  _                           = Nothing
+
+-- | Compatible interface to destruct 'InstanceD'.
+--   No Overlap type is defined before template-haskell-2.11.
+unInstanceD :: Dec -> Maybe (Cxt, Type, [Dec])
+unInstanceD (InstanceD cxt ty decs) = Just (cxt, ty, decs)
+unInstanceD  _                      = Nothing
