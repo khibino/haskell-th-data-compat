@@ -66,5 +66,6 @@ unNewtypeInstD  _                              = Nothing
 
 -- | Compatible interface to destruct 'InstanceD'
 --   No Overlap type is defined before template-haskell-2.11.
+unInstanceD :: Dec -> Maybe (Cxt, Type, [Dec])
 unInstanceD (InstanceD _ cxt ty decs) = Just (cxt, ty, decs)
 unInstanceD  _                        = Nothing
