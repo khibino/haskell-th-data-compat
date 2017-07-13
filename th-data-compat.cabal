@@ -22,6 +22,10 @@ flag template-haskell-210
   description: If true, use template-haskell 2.10 or older, otherwise use template-haskell 2.11 or newer.
   default:     True
 
+flag template-haskell-212
+  description: If true, use template-haskell 2.12 or newer, otherwise use template-haskell 2.11 or older.
+  default:     False
+
 library
   exposed-modules:      Language.Haskell.TH.Compat.Data
 
@@ -30,9 +34,14 @@ library
                           Language.Haskell.TH.Compat.Data.V210
     build-depends:        template-haskell >=2.4 && <2.11
   else
-    other-modules:
+    if flag(template-haskell-212)
+      other-modules:
                           Language.Haskell.TH.Compat.Data.Current
-    build-depends:        template-haskell >=2.11
+      build-depends:      template-haskell >=2.12
+    else
+      other-modules:
+                          Language.Haskell.TH.Compat.Data.V211
+      build-depends:      template-haskell ==2.11.*
 
   build-depends:         base <5
 
