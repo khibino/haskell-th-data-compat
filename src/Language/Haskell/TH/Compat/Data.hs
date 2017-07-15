@@ -2,7 +2,7 @@
 
 -- |
 -- Module      : Language.Haskell.TH.Compat.Data
--- Copyright   : 2016 Kei Hibino
+-- Copyright   : 2016-2017 Kei Hibino
 -- License     : BSD3
 --
 -- Maintainer  : ex8k.hibino@gmail.com
