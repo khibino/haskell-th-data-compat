@@ -21,11 +21,11 @@ tested-with:           GHC == 8.2.1
 
 flag template-haskell-210
   description: If true, use template-haskell 2.10 or older, otherwise use template-haskell 2.11 or newer.
-  default:     True
+  default:     False
 
 flag template-haskell-212
   description: If true, use template-haskell 2.12 or newer, otherwise use template-haskell 2.11 or older.
-  default:     False
+  default:     True
 
 library
   exposed-modules:      Language.Haskell.TH.Compat.Data
