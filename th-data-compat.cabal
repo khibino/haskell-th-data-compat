@@ -33,6 +33,7 @@ library
                           Language.Haskell.TH.Compat.Data.Current
       build-depends:      template-haskell >=2.12
     else
+      -- 8 <= ghc < 8.2
       other-modules:
                           Language.Haskell.TH.Compat.Data.V211
       build-depends:      template-haskell ==2.11.*
