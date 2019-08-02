@@ -24,20 +24,24 @@ tested-with:           GHC == 8.6.1, GHC == 8.6.2, GHC == 8.6.3, GHC == 8.6.4, G
 library
   exposed-modules:      Language.Haskell.TH.Compat.Data
 
-  if impl(ghc < 8)
-    other-modules:
-                          Language.Haskell.TH.Compat.Data.V210
-    build-depends:        template-haskell >=2.4 && <2.11
+  if impl(ghc >= 8.8)
+      other-modules:
+                          Language.Haskell.TH.Compat.Data.Current
+      build-depends:      template-haskell >=2.15
   else
     if impl(ghc >= 8.2)
       other-modules:
-                          Language.Haskell.TH.Compat.Data.Current
+                          Language.Haskell.TH.Compat.Data.V214
       build-depends:      template-haskell >=2.12
     else
-      -- 8 <= ghc < 8.2
-      other-modules:
+      if impl(ghc >= 8.0)
+        other-modules:
                           Language.Haskell.TH.Compat.Data.V211
-      build-depends:      template-haskell ==2.11.*
+        build-depends:    template-haskell ==2.11.*
+      else
+        other-modules:
+                          Language.Haskell.TH.Compat.Data.V210
+        build-depends:    template-haskell >=2.4 && <2.11
 
   build-depends:         base <5
 
