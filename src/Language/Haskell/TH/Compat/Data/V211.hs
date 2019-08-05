@@ -12,6 +12,8 @@ import Language.Haskell.TH
    Dec (DataD, NewtypeD, DataInstD, NewtypeInstD, InstanceD),
    dataD, newtypeD, dataInstD, newtypeInstD, conT)
 
+import Language.Haskell.TH.Compat.Data.Util (foldAppT_)
+
 
 -- | Definition against 'dataD',
 --   compatible with before temaplate-haskell-2.11
@@ -42,8 +44,8 @@ dataInstD' :: CxtQ -> Name -> [TypeQ] -> [ConQ] -> [Name]
 dataInstD' cxt n as cs ds = dataInstD cxt n as Nothing cs $ mapM conT ds
 
 -- | Compatible interface to destruct 'DataInstD'
-unDataInstD :: Dec -> Maybe (Cxt, Name, [Type], Maybe Kind, [Con], [Type])
-unDataInstD (DataInstD cxt n as mk cs ds) = Just (cxt, n, as, mk, cs, ds)
+unDataInstD :: Dec -> Maybe (Cxt, Maybe [TyVarBndr], Type, Maybe Kind, [Con], [Type])
+unDataInstD (DataInstD cxt n as mk cs ds) = Just (cxt, Nothing, foldAppT_ n as, mk, cs, ds)
 unDataInstD  _                            = Nothing
 
 -- | Definition against 'newtypeInstD',
@@ -53,8 +55,8 @@ newtypeInstD' :: CxtQ -> Name -> [TypeQ] -> ConQ -> [Name]
 newtypeInstD' cxt n as c ds = newtypeInstD cxt n as Nothing c $ mapM conT ds
 
 -- | Compatible interface to destruct 'NewtypeInstD'
-unNewtypeInstD :: Dec -> Maybe (Cxt, Name, [Type], Maybe Kind, Con, [Type])
-unNewtypeInstD (NewtypeInstD cxt n as mk c ds) = Just (cxt, n, as, mk, c, ds)
+unNewtypeInstD :: Dec -> Maybe (Cxt, Maybe [TyVarBndr], Type, Maybe Kind, Con, [Type])
+unNewtypeInstD (NewtypeInstD cxt n as mk c ds) = Just (cxt, Nothing, foldAppT_ n as, mk, c, ds)
 unNewtypeInstD  _                              = Nothing
 
 -- | Compatible interface to destruct 'InstanceD'

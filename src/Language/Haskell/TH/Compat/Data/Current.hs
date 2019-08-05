@@ -49,8 +49,8 @@ dataInstD' :: CxtQ -> Name -> [TypeQ] -> [ConQ] -> [Name]
 dataInstD' cxt n as cs ds = dataInstD cxt n as Nothing cs $ derivesFromNames ds
 
 -- | Compatible interface to destruct 'DataInstD'
-unDataInstD :: Dec -> Maybe (Cxt, Name, [Type], Maybe Kind, [Con], [Type])
-unDataInstD (DataInstD cxt n as mk cs ds) = Just (cxt, n, as, mk, cs, ds >>= unDerivClause)
+unDataInstD :: Dec -> Maybe (Cxt, Maybe [TyVarBndr], Type, Maybe Kind, [Con], [Type])
+unDataInstD (DataInstD cxt b ty mk cs ds) = Just (cxt, b, ty, mk, cs, ds >>= unDerivClause)
 unDataInstD  _                            = Nothing
 
 -- | Definition against 'newtypeInstD',
@@ -60,8 +60,8 @@ newtypeInstD' :: CxtQ -> Name -> [TypeQ] -> ConQ -> [Name]
 newtypeInstD' cxt n as c ds = newtypeInstD cxt n as Nothing c $ derivesFromNames ds
 
 -- | Compatible interface to destruct 'NewtypeInstD'
-unNewtypeInstD :: Dec -> Maybe (Cxt, Name, [Type], Maybe Kind, Con, [Type])
-unNewtypeInstD (NewtypeInstD cxt n as mk c ds) = Just (cxt, n, as, mk, c, ds >>= unDerivClause)
+unNewtypeInstD :: Dec -> Maybe (Cxt, Maybe [TyVarBndr], Type, Maybe Kind, Con, [Type])
+unNewtypeInstD (NewtypeInstD cxt b ty mk c ds) = Just (cxt, b, ty, mk, c, ds >>= unDerivClause)
 unNewtypeInstD  _                              = Nothing
 
 -- | Compatible interface to destruct 'InstanceD'
