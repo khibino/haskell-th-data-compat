@@ -8,7 +8,7 @@ license:             BSD3
 license-file:        LICENSE
 author:              Kei Hibino
 maintainer:          ex8k.hibino@gmail.com
-copyright:           Copyright (c) 2016-2019 Kei Hibino
+copyright:           Copyright (c) 2016-2020 Kei Hibino
 category:            Language
 build-type:          Simple
 cabal-version:       >=1.10
