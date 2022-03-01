@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 module Language.Haskell.TH.Compat.Data.Current (
   dataD', unDataD,
   newtypeD', unNewtypeD,
@@ -8,10 +9,18 @@ module Language.Haskell.TH.Compat.Data.Current (
 
 import Language.Haskell.TH
   (CxtQ, ConQ, TypeQ, DecQ,
-   Cxt, Con, Type, Name, TyVarBndr, Kind,
+   Cxt, Con, Type, Name, Kind,
    Dec (DataD, NewtypeD, DataInstD, NewtypeInstD, InstanceD),
    DerivClauseQ, DerivClause (..), Pred,
    dataD, newtypeD, dataInstD, newtypeInstD, derivClause, conT)
+
+import qualified Language.Haskell.TH as TH
+
+#if MIN_VERSION_template_haskell(2,17,0)
+type TyVarBndr = TH.TyVarBndrUnit
+#else
+type TyVarBndr = TH.TyVarBndr
+#endif
 
 
 derivesFromNames :: [Name] -> [DerivClauseQ]
