@@ -28,24 +28,29 @@ library
 
   other-modules:        Language.Haskell.TH.Compat.Data.Util
 
-  if impl(ghc >= 8.8)
+  if impl(ghc >= 9.0)
       other-modules:
                           Language.Haskell.TH.Compat.Data.Current
-      build-depends:      template-haskell >=2.15
+      build-depends:      template-haskell >=2.17
   else
-    if impl(ghc >= 8.2)
-      other-modules:
-                          Language.Haskell.TH.Compat.Data.V214
-      build-depends:      template-haskell >=2.12
+    if impl(ghc >= 8.8)
+        other-modules:
+                            Language.Haskell.TH.Compat.Data.V215
+        build-depends:      template-haskell >=2.15
     else
-      if impl(ghc >= 8.0)
+      if impl(ghc >= 8.2)
         other-modules:
-                          Language.Haskell.TH.Compat.Data.V211
-        build-depends:    template-haskell ==2.11.*
+                            Language.Haskell.TH.Compat.Data.V214
+        build-depends:      template-haskell >=2.12
       else
-        other-modules:
-                          Language.Haskell.TH.Compat.Data.V210
-        build-depends:    template-haskell >=2.4 && <2.11
+        if impl(ghc >= 8.0)
+          other-modules:
+                            Language.Haskell.TH.Compat.Data.V211
+          build-depends:    template-haskell ==2.11.*
+        else
+          other-modules:
+                            Language.Haskell.TH.Compat.Data.V210
+          build-depends:    template-haskell >=2.4 && <2.11
 
   build-depends:         base <5
 
