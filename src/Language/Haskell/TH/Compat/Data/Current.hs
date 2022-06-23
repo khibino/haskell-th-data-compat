@@ -8,14 +8,10 @@ module Language.Haskell.TH.Compat.Data.Current (
 
 import Language.Haskell.TH
   (CxtQ, ConQ, TypeQ, DecQ,
-   Cxt, Con, Type, Name, Kind,
+   Cxt, Con, Type, Name, TyVarBndr, Kind,
    Dec (DataD, NewtypeD, DataInstD, NewtypeInstD, InstanceD),
    DerivClauseQ, DerivClause (..), Pred,
    dataD, newtypeD, dataInstD, newtypeInstD, derivClause, conT)
-import qualified Language.Haskell.TH as Original
-
-
-type TyVarBndr = Original.TyVarBndr ()
 
 
 derivesFromNames :: [Name] -> [DerivClauseQ]
@@ -26,23 +22,23 @@ unDerivClause (DerivClause _ ps) = ps
 
 -- | Definition against 'dataD',
 --   compatible with before temaplate-haskell-2.11
-dataD' :: CxtQ -> Name -> [TyVarBndr] -> [ConQ] -> [Name]
+dataD' :: CxtQ -> Name -> [TyVarBndr ()] -> [ConQ] -> [Name]
        -> DecQ
 dataD' cxt n bs cs ds = dataD cxt n bs Nothing cs $ derivesFromNames ds
 
 -- | Compatible interface to destruct 'DataD'
-unDataD :: Dec -> Maybe (Cxt, Name, [TyVarBndr], Maybe Kind, [Con], [Type])
+unDataD :: Dec -> Maybe (Cxt, Name, [TyVarBndr ()], Maybe Kind, [Con], [Type])
 unDataD (DataD cxt n bs mk cs ds) = Just (cxt, n, bs, mk, cs, ds >>= unDerivClause)
 unDataD  _                        = Nothing
 
 -- | Definition against 'newtypeD',
 --   compatible with before temaplate-haskell-2.11
-newtypeD' :: CxtQ -> Name -> [TyVarBndr] -> ConQ -> [Name]
+newtypeD' :: CxtQ -> Name -> [TyVarBndr ()] -> ConQ -> [Name]
           -> DecQ
 newtypeD' cxt n bs c ds = newtypeD cxt n bs Nothing c $ derivesFromNames ds
 
 -- | Compatible interface to destruct 'NewtypeD'
-unNewtypeD :: Dec -> Maybe (Cxt, Name, [TyVarBndr], Maybe Kind, Con, [Type])
+unNewtypeD :: Dec -> Maybe (Cxt, Name, [TyVarBndr ()], Maybe Kind, Con, [Type])
 unNewtypeD (NewtypeD cxt n bs mk c ds) = Just (cxt, n, bs, mk, c, ds >>= unDerivClause)
 unNewtypeD  _                          = Nothing
 
@@ -53,7 +49,7 @@ dataInstD' :: CxtQ -> Name -> [TypeQ] -> [ConQ] -> [Name]
 dataInstD' cxt n as cs ds = dataInstD cxt n as Nothing cs $ derivesFromNames ds
 
 -- | Compatible interface to destruct 'DataInstD'
-unDataInstD :: Dec -> Maybe (Cxt, Maybe [TyVarBndr], Type, Maybe Kind, [Con], [Type])
+unDataInstD :: Dec -> Maybe (Cxt, Maybe [TyVarBndr ()], Type, Maybe Kind, [Con], [Type])
 unDataInstD (DataInstD cxt b ty mk cs ds) = Just (cxt, b, ty, mk, cs, ds >>= unDerivClause)
 unDataInstD  _                            = Nothing
 
@@ -64,7 +60,7 @@ newtypeInstD' :: CxtQ -> Name -> [TypeQ] -> ConQ -> [Name]
 newtypeInstD' cxt n as c ds = newtypeInstD cxt n as Nothing c $ derivesFromNames ds
 
 -- | Compatible interface to destruct 'NewtypeInstD'
-unNewtypeInstD :: Dec -> Maybe (Cxt, Maybe [TyVarBndr], Type, Maybe Kind, Con, [Type])
+unNewtypeInstD :: Dec -> Maybe (Cxt, Maybe [TyVarBndr ()], Type, Maybe Kind, Con, [Type])
 unNewtypeInstD (NewtypeInstD cxt b ty mk c ds) = Just (cxt, b, ty, mk, c, ds >>= unDerivClause)
 unNewtypeInstD  _                              = Nothing
 
