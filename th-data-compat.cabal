@@ -55,6 +55,13 @@ library
                             Language.Haskell.TH.Compat.Data.V210
           build-depends:    template-haskell >=2.4 && <2.11
 
+  if impl(ghc >= 9.0)
+      other-modules:
+                          Language.Haskell.TH.Compat.TyVarBndr.Current
+  else
+      other-modules:
+                          Language.Haskell.TH.Compat.TyVarBndr.V216
+
   build-depends:         base <5
 
   other-extensions:    CPP
