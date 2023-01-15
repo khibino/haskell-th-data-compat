@@ -1,4 +1,4 @@
-module Language.Haskell.TH.Compat.Data.V215 (
+module Language.Haskell.TH.Compat.Data.V216 (
   dataD', unDataD,
   newtypeD', unNewtypeD,
   dataInstD', unDataInstD,

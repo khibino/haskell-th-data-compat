@@ -38,7 +38,7 @@ library
   else
     if impl(ghc >= 8.8)
         other-modules:
-                            Language.Haskell.TH.Compat.Data.V215
+                            Language.Haskell.TH.Compat.Data.V216
         build-depends:      template-haskell >=2.15
     else
       if impl(ghc >= 8.2)
