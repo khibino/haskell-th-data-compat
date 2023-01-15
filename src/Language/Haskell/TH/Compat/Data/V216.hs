@@ -1,3 +1,4 @@
+-- The latest version of applying this module impl is template-haskell-2.16
 module Language.Haskell.TH.Compat.Data.V216 (
   dataD', unDataD,
   newtypeD', unNewtypeD,
