@@ -1,6 +1,6 @@
 
 name:                th-data-compat
-version:             0.1.1.0
+version:             0.1.1.1
 synopsis:            Compatibility for data definition template of TH
 description:         This package contains wrapped name definitions of
                      data definition template
