@@ -13,10 +13,10 @@
 -- data-type declaration templates for before temaplate-haskell-2.11
 module Language.Haskell.TH.Compat.Data (
   -- * Interfaces to construct data declarations
-  dataD', newtypeD', dataInstD', newtypeInstD',
+  dataD', newtypeD', dataInstD', newtypeInstD', plainTVspecified,
 
   -- * Interfaces to destruct data declarations
-  unDataD, unNewtypeD, unDataInstD, unNewtypeInstD, unInstanceD,
+  unDataD, unNewtypeD, unDataInstD, unNewtypeInstD, unInstanceD, unTyVarBndr,
   ) where
 
 #if MIN_VERSION_template_haskell(2,17,0)
@@ -29,4 +29,10 @@ import Language.Haskell.TH.Compat.Data.V214
 import Language.Haskell.TH.Compat.Data.V211
 #else
 import Language.Haskell.TH.Compat.Data.V210
+#endif
+
+#if MIN_VERSION_template_haskell(2,17,0)
+import Language.Haskell.TH.Compat.TyVarBndr.Current
+#else
+import Language.Haskell.TH.Compat.TyVarBndr.V216
 #endif
