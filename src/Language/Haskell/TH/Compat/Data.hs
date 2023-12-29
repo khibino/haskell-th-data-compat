@@ -19,8 +19,10 @@ module Language.Haskell.TH.Compat.Data (
   unDataD, unNewtypeD, unDataInstD, unNewtypeInstD, unInstanceD, unTyVarBndr,
   ) where
 
-#if MIN_VERSION_template_haskell(2,17,0)
+#if MIN_VERSION_template_haskell(2,21,0)
 import Language.Haskell.TH.Compat.Data.Current
+#elif MIN_VERSION_template_haskell(2,17,0)
+import Language.Haskell.TH.Compat.Data.V220
 #elif MIN_VERSION_template_haskell(2,15,0)
 import Language.Haskell.TH.Compat.Data.V216
 #elif MIN_VERSION_template_haskell(2,12,0)
