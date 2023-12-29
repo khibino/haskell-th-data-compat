@@ -31,9 +31,14 @@ library
 
   other-modules:       Language.Haskell.TH.Compat.Data.Util
 
-  if impl(ghc >= 9.0) {
+  if impl(ghc >= 9.8) {
     other-modules:
                          Language.Haskell.TH.Compat.Data.Current
+    build-depends:       template-haskell
+  } else {
+  if impl(ghc >= 9.0) {
+    other-modules:
+                         Language.Haskell.TH.Compat.Data.V220
     build-depends:       template-haskell
   } else {
   if impl(ghc >= 8.8) {
@@ -54,7 +59,7 @@ library
     other-modules:
                          Language.Haskell.TH.Compat.Data.V210
     build-depends:       template-haskell >=2.4 && <2.11
-  }}}}
+  }}}}}
 
   if impl(ghc >= 9.0)
     other-modules:
