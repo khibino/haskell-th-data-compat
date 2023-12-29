@@ -1,4 +1,5 @@
-module Language.Haskell.TH.Compat.Data.Current (
+-- The latest version of applying this module impl is template-haskell-2.20
+module Language.Haskell.TH.Compat.Data.V220 (
   dataD', unDataD,
   newtypeD', unNewtypeD,
   dataInstD', unDataInstD,
